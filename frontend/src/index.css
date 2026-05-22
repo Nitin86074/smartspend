@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+
+    --bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    --text: #0F172A;
+    --card: rgba(255,255,255,0.8);
+    --border: rgba(255,255,255,0.2);
+    --primary: #6366F1;
+    --muted: #6B7280;
+    --success: #22C55E;
+    --danger: #EF4444;
+
+    --chart-tooltip-bg: rgba(255,255,255,0.95);
+    --chart-tooltip-border: rgba(255,255,255,0.3);
+    --chart-tooltip-text: #111827;
+  }
+
+  .dark {
+    color-scheme: dark;
+
+    --bg: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --text: #F9FAFB;
+    --card: rgba(255,255,255,0.05);
+    --border: rgba(255,255,255,0.1);
+    --primary: #818CF8;
+    --muted: #9CA3AF;
+
+    --chart-tooltip-bg: rgba(15,23,42,0.95);
+    --chart-tooltip-border: rgba(255,255,255,0.1);
+    --chart-tooltip-text: #f9fafb;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background: var(--bg);
+    color: var(--text);
+    backdrop-filter: blur(10px);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  ::selection {
+    @apply bg-primary-600 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-gray-500;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply border backdrop-blur-xl bg-white/70 dark:bg-gray-900/60;
+    border-color: rgba(255,255,255,0.2);
+    box-shadow: var(--tw-shadow-glass);
+  }
+
+  .premium-card {
+    @apply rounded-2xl shadow-glass border transition-all duration-300 backdrop-blur-sm;
+    background: var(--card);
+    border-color: var(--border);
+  }
+
+  .premium-card-hover {
+    @apply hover:shadow-glass-hover transition-all duration-300;
+  }
+
+  .gradient-glow {
+    @apply relative overflow-hidden;
+  }
+
+  .gradient-glow::before {
+    content: "";
+    @apply absolute -right-16 -top-16 h-40 w-40 rounded-full bg-primary-500/20 blur-3xl opacity-60;
+  }
+
+  .card {
+    @apply rounded-2xl shadow-glass border transition-all duration-200 backdrop-blur-sm;
+    background: var(--card);
+    border-color: var(--border);
+  }
+
+  .input {
+    @apply w-full px-4 py-2.5 rounded-xl border bg-transparent text-sm transition-all duration-200 backdrop-blur-sm;
+    border-color: var(--border);
+    color: var(--text);
+    background: var(--card);
+  }
+
+  .input:focus {
+    @apply ring-2 ring-primary-500;
+    box-shadow: 0 0 0 2px rgba(99,102,241,0.3);
+  }
+
+  .btn-primary {
+    @apply text-white font-medium px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 text-sm transition-all duration-200;
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  }
+
+  .btn-primary:hover {
+    @apply scale-105;
+    filter: brightness(1.1);
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 backdrop-blur-sm;
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    box-shadow: var(--tw-shadow-glass);
+  }
+
+  .btn-danger {
+    @apply px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200;
+    color: var(--danger);
+    background: rgba(239,68,68,0.1);
+  }
+
+  .page-container {
+    @apply p-4 sm:p-6 space-y-6;
+  }
+
+  .section-title {
+    @apply text-xl font-semibold tracking-tight;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .chart-tooltip {
+    background: var(--chart-tooltip-bg) !important;
+    border-color: var(--chart-tooltip-border) !important;
+    color: var(--chart-tooltip-text) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12) !important;
+  }
+}
